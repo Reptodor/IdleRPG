@@ -4,7 +4,7 @@ public class PlayerCombatSystem : MonoBehaviour
 {
     [SerializeField] private Weapon[] _weapons;
 
-    public Enemy _enemy;
+    private Enemy _enemy;
 
     private int _currentWeaponIndex;
     private int _damage;
@@ -14,11 +14,14 @@ public class PlayerCombatSystem : MonoBehaviour
         _damage = damage;
     }
 
+    public void GetEnemy(Enemy enemy)
+    {
+        _enemy = enemy;
+    }
+
     public void Attack()
     {
-        if (_enemy == null)
-            ChooseEnemy();
-        else
+        if(_enemy != null) 
             _weapons[_currentWeaponIndex].Attack(_enemy, _damage);
     }
 
@@ -36,10 +39,5 @@ public class PlayerCombatSystem : MonoBehaviour
         }
 
         _weapons[_currentWeaponIndex].gameObject.SetActive(true);
-    }
-
-    private void ChooseEnemy()
-    {
-        _enemy = FindAnyObjectByType<Enemy>();
     }
 }

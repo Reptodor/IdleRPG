@@ -16,4 +16,14 @@ public class Player : MonoBehaviour
         _playerCombatSystem = GetComponent<PlayerCombatSystem>();
         _playerCombatSystem.Initialize(_damage);
     }
+
+    public void TakeDamage(int damage)
+    {
+        _playerHealth.TakeDamage(damage);
+    }
+
+    public void GetEnemy(Enemy enemy)
+    {
+        _playerCombatSystem.GetEnemy(enemy);
+    }
 }

@@ -3,10 +3,12 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     private EnemyAnimations _enemyAnimations;
+    private Player _player;
 
-    private void Awake()
+    public void Initialize(Player player)
     {
         _enemyAnimations = GetComponent<EnemyAnimations>();
+        _player = player;
     }
 
     public void Attack()
