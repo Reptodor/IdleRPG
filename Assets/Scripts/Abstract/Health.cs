@@ -29,6 +29,13 @@ public abstract class Health : MonoBehaviour
         Died = false;
     }
 
+    public virtual void Heal()
+    {
+        _currentHealth = _maxHealth;
+        float _currentHealthPercentage = _currentHealth / _maxHealth;
+        HealthChange.Invoke(_currentHealthPercentage);
+    }
+
     public virtual void TakeDamage(float damage)
     {
         if (damage < 0)

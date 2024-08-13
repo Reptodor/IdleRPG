@@ -18,16 +18,24 @@ public class Enemy : MonoBehaviour
         _player = player;
     }
 
+    private void OnEnable()
+    {
+        Timer.TimeExpired += Attack;
+    }
+
+    private void OnDisable()
+    {
+        Timer.TimeExpired -= Attack;
+    }
+
     public void TakeDamage(float damage)
     {
         _enemyHealth.TakeDamage(damage);
-        if(!_enemyHealth.Died)
-            Invoke(nameof(Attack), 1f);
     }
 
     private void Attack()
     {
-        if (_player != null)
+        if (_player != null && !_enemyHealth.Died)
         {
             _enemyAnimations.AnimateAttack();
             _player.TakeDamage(_characterProperties.Damage());

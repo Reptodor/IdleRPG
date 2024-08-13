@@ -9,26 +9,40 @@ public class Timer : MonoBehaviour
 
     private float _remainingTime;
 
-    public bool Chossing;
+    private bool _choosing;
 
-    public Action TimeExpired;
+    public static Action TimeExpired;
 
     private void OnEnable()
     {
         _remainingTime = _timeForChoosing;
+        _choosing = true;
     }
 
     private void Update()
     {
-        if (Chossing)
+        if (_choosing)
         {
             _remainingTime -= Time.deltaTime;
 
             if(_remainingTime <= 0)
             {
-                TimeExpired.Invoke();
+                TimeExpired?.Invoke();
                 _remainingTime = _timeForChoosing;
             }
         }
+        _clock.fillAmount = _remainingTime;
+    }
+
+    public void StartTimer()
+    {
+        _remainingTime = _timeForChoosing;
+        _choosing = true;
+    }
+
+    public void StopTimer(float timeToStart)
+    {
+        _choosing = false;
+        Invoke(nameof(StartTimer), timeToStart);
     }
 }

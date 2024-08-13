@@ -10,6 +10,11 @@ public class PlayerHealth  :  Health
         base.Initialize(health, armor);
     }
 
+    public override void Heal()
+    {
+        base.Heal();
+    }
+
     public override void TakeDamage(float damage)
     {
         Animations.AnimateHit();
