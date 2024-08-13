@@ -2,8 +2,17 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
-    public virtual void Attack(Enemy enemy, int damage)
+    [SerializeField] private float _damageMultiplier = 1;
+
+    protected PlayerAnimations PlayerAnimations;
+
+    private void Awake()
     {
-        Debug.Log("Attack");
+        PlayerAnimations = GetComponentInParent<PlayerAnimations>();
+    }
+
+    public virtual void Attack(Enemy enemy, float damage)
+    {
+        enemy.TakeDamage(damage * _damageMultiplier);
     }
 }

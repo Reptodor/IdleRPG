@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
-public class PlayerHealth  :  Health
+public class EnemyHealth : Health
 {
-    [SerializeField] private DeathMenu _deathMenu;
+    public Action Damaged;
 
     public override void Initialize(int health, int armor)
     {
@@ -20,6 +21,6 @@ public class PlayerHealth  :  Health
     {
         Animations.AnimateDie();
         yield return new WaitForSeconds(DeathTime);
-        _deathMenu.gameObject.SetActive(true);
+        Destroy(gameObject);
     }
 }

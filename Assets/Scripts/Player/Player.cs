@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private int _damage;
-    [SerializeField] private int _health;
+    [SerializeField] private CharacterProperties _characterProperties;
 
     private PlayerHealth _playerHealth;
     private PlayerCombatSystem _playerCombatSystem;
@@ -11,13 +10,13 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         _playerHealth = GetComponent<PlayerHealth>();
-        _playerHealth.Initialize(_health);
+        _playerHealth.Initialize(_characterProperties.Health(), _characterProperties.Armor());
 
         _playerCombatSystem = GetComponent<PlayerCombatSystem>();
-        _playerCombatSystem.Initialize(_damage);
+        _playerCombatSystem.Initialize(_characterProperties.Damage());
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         _playerHealth.TakeDamage(damage);
     }

@@ -1,8 +1,8 @@
 public class Sword : Weapon
 {
-    public override void Attack(Enemy enemy, int damage)
+    public override void Attack(Enemy enemy, float damage)
     {
-        PlayerAnimations.Instance.AnimateSwordAttack();
+        PlayerAnimations.AnimateSwordAttack();
         base.Attack(enemy, damage);
     }
 }
